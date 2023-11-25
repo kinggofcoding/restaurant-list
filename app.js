@@ -12,6 +12,10 @@ app.set('views', './views')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
+  res.render('index', { restaurants, cssPath: cssIndex })
+})
+
+app.get('/restaurants', (req, res) => {
   const keyword = req.query.keyword?.trim()
   const matchedRestaurants = keyword
     ? restaurants.filter((restaurant) =>
@@ -23,7 +27,17 @@ app.get('/', (req, res) => {
         })
       )
     : restaurants
-  res.render('index', { restaurants: matchedRestaurants, cssPath: cssIndex, keyword })
+  res.render('index', {
+    restaurants: matchedRestaurants,
+    cssPath: cssIndex,
+    keyword,
+  })
+})
+
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  const restaurant = restaurants.find((restaurant) => restaurant.id.toString() === id)
+  res.render('show', { restaurant, cssPath: cssShow })
 })
 
 app.listen(port, () => {
