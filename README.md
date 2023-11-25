@@ -6,4 +6,4 @@ A simple web application for restaurant fanatic
 - searching restaurants
 
 ### Searching
-type the keyword of the movies in search bar
+type the keyword of the restaurants in search bar
